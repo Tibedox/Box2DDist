@@ -1,32 +1,48 @@
 package ru.samsung.box2ddist;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
-    private Texture image;
+    World world;
+    Box2DDebugRenderer debugRenderer;
+    OrthographicCamera camera;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        world = new World(new Vector2(0, -9.8f), true);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 16, 9);
+        debugRenderer = new Box2DDebugRenderer();
+        Static wall1 = new Static(world, 2, 4.5f, 1f, 8f);
+        Static wall2 = new Static(world, 14, 4.5f, 1f, 8f);
+        Static floor = new Static(world, 8f, 1f, 10, 1f);
+        Dynamic[] ball = new Dynamic[20];
+        for (int i = 0; i < ball.length; i++) {
+            ball[i] = new Dynamic(world, 8f+i/10f, 5f+i*2, 0.5f);
+        }
     }
 
     @Override
     public void render() {
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(image, 140, 210);
         batch.end();
+        debugRenderer.render(world, camera.combined);
+        world.step(1/60f, 6, 2);
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        image.dispose();
     }
 }
