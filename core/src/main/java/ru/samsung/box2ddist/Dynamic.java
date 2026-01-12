@@ -18,9 +18,9 @@ public class Dynamic {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 0.5f;
+        fixtureDef.density = 0.8f;
         fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.6f;
+        fixtureDef.restitution = 0.5f;
 
         Fixture fixture = body.createFixture(fixtureDef);
 

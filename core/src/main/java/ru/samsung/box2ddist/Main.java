@@ -24,10 +24,10 @@ public class Main extends ApplicationAdapter {
         debugRenderer = new Box2DDebugRenderer();
         Static wall1 = new Static(world, 2, 4.5f, 1f, 8f);
         Static wall2 = new Static(world, 14, 4.5f, 1f, 8f);
-        Static floor = new Static(world, 8f, 1f, 10, 1f);
-        Dynamic[] ball = new Dynamic[20];
+        Static floor = new Static(world, 8f, 1f, 11, 1f);
+        Dynamic[] ball = new Dynamic[60];
         for (int i = 0; i < ball.length; i++) {
-            ball[i] = new Dynamic(world, 8f+i/10f, 5f+i*2, 0.5f);
+            ball[i] = new Dynamic(world, 4f+i/10f, 5f+i*2, 0.2f);
         }
     }
 
