@@ -1,5 +1,6 @@
 package ru.samsung.box2ddist;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,12 +11,14 @@ import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Dynamic {
+    Body body;
+
     public Dynamic(World world, float x, float y, float radius) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
 
-        Body body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
 
         CircleShape shape = new CircleShape();
         shape.setRadius(radius);
@@ -33,7 +36,7 @@ public class Dynamic {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
 
-        Body body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2, height/2);
@@ -51,7 +54,7 @@ public class Dynamic {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
 
-        Body body = world.createBody(bodyDef);
+        body = world.createBody(bodyDef);
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2, size/2);
@@ -67,5 +70,15 @@ public class Dynamic {
         body.createFixture(fixtureDef);
 
         shape.dispose();
+    }
+
+    public boolean isTouched(Vector2 point) {
+        // Перебираем все фикстуры тела
+        for (Fixture fixture : body.getFixtureList()) {
+            if (fixture.testPoint(point)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
