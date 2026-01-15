@@ -15,6 +15,8 @@ public class Main extends ApplicationAdapter {
     Box2DDebugRenderer debugRenderer;
     OrthographicCamera camera;
 
+    Kinematic platform;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -33,10 +35,13 @@ public class Main extends ApplicationAdapter {
         for (int i = 0; i < brick.length; i++) {
             brick[i] = new Dynamic(world, 5+i/10f, 5+i*2, 0.5f, 1);
         }
+        platform = new Kinematic(world, 16, 3, 4, 1, -2, 0, 4);
     }
 
     @Override
     public void render() {
+        platform.move();
+
         ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
