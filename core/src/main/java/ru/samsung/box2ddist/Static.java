@@ -14,7 +14,6 @@ public class Static {
         Body body = world.createBody(bodyDef);
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width/2f, height/2f);
-
         body.createFixture(shape, 0.0f);
         shape.dispose();
     }

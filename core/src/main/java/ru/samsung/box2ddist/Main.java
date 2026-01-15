@@ -22,12 +22,16 @@ public class Main extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 16, 9);
         debugRenderer = new Box2DDebugRenderer();
-        Static wall1 = new Static(world, 2, 4.5f, 1f, 8f);
-        Static wall2 = new Static(world, 14, 4.5f, 1f, 8f);
-        Static floor = new Static(world, 8f, 1f, 11, 1f);
+        Static wall1 = new Static(world, 2, 4.5f, 1, 8);
+        Static wall2 = new Static(world, 14, 4.5f, 1, 8);
+        Static floor = new Static(world, 8, 1, 11, 1);
         Dynamic[] ball = new Dynamic[60];
+        Dynamic[] brick = new Dynamic[10];
         for (int i = 0; i < ball.length; i++) {
-            ball[i] = new Dynamic(world, 4f+i/10f, 5f+i*2, 0.2f);
+            ball[i] = new Dynamic(world, 4+i/10f, 5+i*2, 0.4f);
+        }
+        for (int i = 0; i < brick.length; i++) {
+            brick[i] = new Dynamic(world, 5+i/10f, 5+i*2, 0.5f, 1);
         }
     }
 
