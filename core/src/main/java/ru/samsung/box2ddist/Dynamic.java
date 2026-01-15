@@ -45,4 +45,27 @@ public class Dynamic {
         Fixture fixture = body.createFixture(fixtureDef);
         shape.dispose();
     }
+
+    public Dynamic(World world, float x, float y, float width, float height, float size) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(x, y);
+
+        Body body = world.createBody(bodyDef);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width/2, size/2);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 0.8f;
+        fixtureDef.friction = 0.4f;
+        fixtureDef.restitution = 0.3f;
+        body.createFixture(fixtureDef);
+
+        shape.setAsBox(size/2, height/2);
+        fixtureDef.shape = shape;
+        body.createFixture(fixtureDef);
+
+        shape.dispose();
+    }
 }

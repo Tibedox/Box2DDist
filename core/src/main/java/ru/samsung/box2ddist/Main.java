@@ -29,6 +29,7 @@ public class Main extends ApplicationAdapter {
         Static floor = new Static(world, 8, 1, 11, 1);
         Dynamic[] ball = new Dynamic[60];
         Dynamic[] brick = new Dynamic[10];
+        Dynamic cross = new Dynamic(world, 7, 5, 1.5f, 2.5f, 0.8f);
         for (int i = 0; i < ball.length; i++) {
             ball[i] = new Dynamic(world, 4+i/10f, 5+i*2, 0.4f);
         }
